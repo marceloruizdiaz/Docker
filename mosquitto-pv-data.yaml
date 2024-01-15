@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-data
+spec:
+  storageClassName: storage-nfs-data
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 10.50.0.33
+    path: /home/MQTT/data
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nfs-pvc-data
+spec:
+  storageClassName: storage-nfs-data
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
